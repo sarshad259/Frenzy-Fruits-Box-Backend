@@ -15,9 +15,6 @@ const shopReviewRouter = require("./routes/shop/review-routes");
 
 const commonFeatureRouter = require("./routes/common/feature-routes");
 
-//create a database connection -> u can also
-//create a separate file for this and then import/use that file here
-
 mongoose
   .connect("mongodb+srv://sarshadahmed259:Sarshad.259@cluster0.r4a17uv.mongodb.net/")
   .then(() => console.log("MongoDB connected"))
@@ -26,9 +23,19 @@ mongoose
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// ✅ Add CSP header here
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; font-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline';"
+  );
+  next();
+});
+
+// CORS setup
 app.use(
   cors({
-    origin: "https://preeminent-cheesecake-c62914.netlify.app/auth/login",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -43,6 +50,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+
 app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/orders", adminOrderRouter);
