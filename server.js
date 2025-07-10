@@ -25,12 +25,12 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ Add CSP header here
 app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; font-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline';"
+  res.setHeader("Content-Security-Policy",
+    "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:;"
   );
   next();
 });
+
 
 // CORS setup
 app.use(
