@@ -42,8 +42,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://frenzy-fruits.vercel.app" // Change to your actual frontend URL if different
+      "https://frenzy-fruits-box-frontend.onrender.com"
     ],
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
